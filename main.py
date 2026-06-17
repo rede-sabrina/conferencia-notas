@@ -30,6 +30,11 @@ if arquivo:
 
         if not resultado.empty:
             status = resultado.iloc[0]["Status"]
-            st.success(f"Nota encontrada! Status: {status}")
+            if status == "Conferida":
+                st.success("Nota Conferida - OK!")
+            elif status == "Recebida":
+                st.warning("Nota recebida, mas ainda não conferida.")
+            elif status == "Inicial" or status == "Cancelada":
+                st.error(f"Nota com status '{status}' encontrada. Verificar a situação da nota!")
         else:
             st.error("Nota não encontrada.")
